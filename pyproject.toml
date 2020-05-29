@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "hisia"
+version = "0.1.0"
+description = "Danish sentiment analysis using scikit-learn and Trustpilot dataset"
+authors = ["Prayson W. Daniel <praysonwilfred@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+scikit-learn = "0.23.1"
+pandas = "^1.0.3"
+lemmy = "^2.1.0"
+dill = "^0.3.1"
+matplotlib = "^3.2.1"
+
+
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.8.2"
+python-dotenv = ">=0.5.1"
+pytest = "^5.4.2"
+pytest-cov = "^2.9.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
