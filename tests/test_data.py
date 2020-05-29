@@ -1,8 +1,14 @@
 import pandas as pd
 
-def test_training_data():
+def test_training_data_shape(training_data):
        # Assert the data is having the same number of rows and columns
-    df = pd.read_json('src/data/data.json')
-    assert df.shape == (254464, 3), 'data is changed!'
-    assert df.columns == ['features','target','stars'], 'data does not have correct columns'
-    assert df['target'].dtype.name == 'int', 'target features is not datatype int'
+   
+    assert training_data.shape == (254464, 3), 'data is changed!'
+    
+def test_training_data_columns(training_data):
+    
+    assert training_data.columns.to_list() == ['features','target','stars'], 'data does not have correct columns'
+    
+def test_training_data_dtypes(training_data):
+    assert training_data['target'].dtype.name == 'int64', 'target inputs is not datatype int'
+    assert training_data['features'].dtype.name == 'object', 'features input is not datatype object'
