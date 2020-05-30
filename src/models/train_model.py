@@ -22,12 +22,10 @@ from helpers import persist_model
 from helpers import show_diagram
 from helpers import show_most_informative_features
 
-print('[+] Model Training\n\n\tTesting tokenizers and dataset')
-# Assert the toenizer and stops are working
-assert tokenizer('Jeg er vred på, at jeg ikke fik min pakke :(') == ['vred', 'ikke', ':('], 'tokenizer did not load correctly'
-# Assert the data is having the same number of rows and columns
+print('[+] Model Training\n\n\tData Loading and spliting dataset')
+
 df = pd.read_json('src/data/data.json')
-assert df.shape == (254464, 3), 'data is changed!'
+
 
 X_train, X_test, y_train, y_test = train_test_split(df['features'], 
                                                      df['target'],
@@ -52,6 +50,7 @@ hisia = Pipeline(steps =[
         ('logistic_regression', LogisticRegressionCV(cv=5,
                                                     solver='saga',
                                                     scoring='accuracy',
+                                                    max_iter=100,
                                                     n_jobs=-1, 
                                                     verbose=0))
 ])

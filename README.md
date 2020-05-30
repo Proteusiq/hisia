@@ -7,34 +7,38 @@ Project Organization
 ------------
 
     ├── LICENSE
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── README.md         
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
+    ├── notebooks          <- Jupyter notebooks. Reproduce the results, and show model explainations
+    │   └── model_training.ipynb         
+    │                         
     │
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
+    │   ├── data           <- Path to training and validating dataset and stopwords
+    │   │   └── data.json
+    │   │   └── stops.pkl
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
+    │   ├── models         <- Helpers, train models and then use trained models to make
+    │   │   │                 predictions scripts
+    │   │   ├── helpers.py
+    │   │   ├── hisia.py
     │   │   └── train_model.py
     │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
+    │   └── visualization  <-  Results oriented visualizations
+    │       └── ROC.png
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    ├── tests             <- Path to tests to check models accurance, datatypes, scikit-learn version
+    │   ├── __init__.py
+    │   ├── conftest.py
+    │   ├── test_basemodel_results.py
+    │   ├── test_data.py
+    │   ├── test_scikit_version.py
+    │   ├── test_tokenizer.py  
+    │
+    │
+    └── tox.ini            <- tox file to trains models and run pytests
 
 
 --------
