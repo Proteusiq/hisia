@@ -2,11 +2,13 @@ import joblib
 import re
 import dill
 import lemmy
+from loguru import logger
 
 
 STOP_WORDS = joblib.load('src/data/stops.pkl')
 lemmatizer = lemmy.load('da')
 
+@logger.catch
 def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     
     if stop_words is None:
@@ -56,7 +58,7 @@ def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     
     return result.split()
 
-
+@logger.catch
 def persist_model(name,clf=None, method='load'):
     'Pass in the file name, object to be saved or loaded'
     import dill
@@ -65,15 +67,16 @@ def persist_model(name,clf=None, method='load'):
         with open(name,'rb') as f:
             return dill.load(f)
     elif method == 'save':
-        print(f'[+] Persisting {name} ...')
+        logger.info(f'[+] Persisting {name} ...')
         if clf is None:
             raise ValueError('Pass Model/Pipeline/Transformation')
         with open(name,'wb') as f:
             dill.dump(clf,f)
-            print(f'[+] Persistence Complete. Model {name} is saved')
+            logger.info(f'[+] Persistence Complete. Model {name} is saved')
     else:
         raise ValeuError('Wrong arguments')
 
+@logger.catch
 def show_diagram(trained_clf, X_train, y_train, X_test, y_test, compare_test=True):
     import matplotlib.pyplot as plt
     from sklearn.metrics import roc_curve, auc, classification_report

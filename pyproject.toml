@@ -23,6 +23,7 @@ pandas = "^1.0.3"
 lemmy = "^2.1.0"
 dill = "0.3.1.1"
 matplotlib = "^3.2.1"
+loguru = "^0.5.0"
 
 
 
