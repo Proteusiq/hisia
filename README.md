@@ -47,11 +47,11 @@ Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient 
 HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth loss 'modified_huber as loss function and L2 penalty. Test score **accuracy 94%** and **recall of 94%**. SGDClassifier was select because of partial_fit. It allows batch/online training.
 
 **Note:** This score reflects models in regards to TrustPilot reviews style of writing.<b>
- >8*10 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
+ >8\*10 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
 
-:warning: Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory. Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location.
+:warning: **Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location.
 
 Features
 --------
@@ -105,5 +105,11 @@ Project Organization
 
 
 --------
+# Bugs and Errors: 6% Expected Error
+_"All models are wrong, but some are useful"_ There is no magic. Expect the model to make very basic mistakes. To help in training a better model, post an issue with the sentence and expected results, and model results. Because of data limitation, this model performs very well in relationship to products or companies reviews, but limited outside those domain.
+
+Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** I am working of fixing it.
+
+
 # Retrain and Test: For Developers
 Coming Soon
