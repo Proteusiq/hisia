@@ -68,8 +68,8 @@ Project Organization
     │   └── helpers.py          
     │                         
     │
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── hisia                <- Source code for use in this project.
+    │   ├── __init__.py    <- Makes hisia a Python module
     │   │
     │   ├── data           <- Path to training and validating dataset and stopwords
     │   │   └── data.json

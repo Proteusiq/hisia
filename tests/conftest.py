@@ -5,12 +5,12 @@ from sklearn.model_selection import train_test_split
 
 @pytest.fixture
 def training_data():
-    return pd.read_json('src/data/data.json')
+    return pd.read_json('hisia/data/data.json')
 
 
 @pytest.fixture
 def custom_training_data():
-    return pd.read_json('src/data/data_custom.json')
+    return pd.read_json('hisia/data/data_custom.json')
 
 @pytest.fixture
 def test_data(training_data):

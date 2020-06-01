@@ -1,4 +1,4 @@
-from src.models.hisia import Hisia
+from hisia import Hisia
 
 
 
