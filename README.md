@@ -1,7 +1,9 @@
 Hisia
 ==============================
 
-:blush: :smiley: :relaxed: :smirk: :flushed: :worried: :frowning: :disappointed: :angry: :persevere: 
+:blush: :smiley: :relaxed: :yum: :wink: :smirk: :flushed: :worried: :frowning: :triumph: :disappointed: :angry: :persevere: :confounded: :shit: 
+
+
 Danish sentiment analysis using scikit-learn LogisticRegression
 
 ![hisia cover](cover_image.png)
@@ -49,7 +51,7 @@ HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth los
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
 
-:warning: Running `from hisia import Hisia` will move the create a directory hisia with model/base_model.pkl and data/stops.pkl on the current directory. Until now, I cannot figure out how I can package that with `poetry`.
+:warning: Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory. Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location.
 
 Features
 --------
