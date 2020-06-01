@@ -41,10 +41,10 @@ _Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it
 **Models**<br>
 Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient (SAG) as a solver, L2 penalty was select for the base model. Test score **accuracy is ca. 93%** and **recall of 93%**. SAGA is a faster solver for large datasets (rows and columns wise). As stochastic gradient, the memory of the previous gradient is incorporated/feed-forward current epoch. This allows a faster convergence rate. Seeds: 42 in data split of 80% training, 20% test, and 42 in the model used for reproducibility. Check notebooks for other parameters.
 
-HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth loss 'modified_huber as loss function and L2 penalty. Test score **accurance  94%** and **recall of 94%**. SGDClassifier was select because of partial_fit. It allows batch/online training.
+HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth loss 'modified_huber as loss function and L2 penalty. Test score **accuracy 94%** and **recall of 94%**. SGDClassifier was select because of partial_fit. It allows batch/online training.
 
 **Note:** This score reflects models in regards to TrustPilot reviews style of writing.<b>
- >8*10 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accurancy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). . 
+ >8*10 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
 
@@ -63,30 +63,31 @@ Project Organization
     ├── LICENSE
     ├── README.md         
     │
-    ├── notebooks          <- Jupyter notebook. Reproduce the results, and show model explanations
+    ├── notebooks          <-  Jupyter notebook. Reproduce the results, and show model explanations
     │   └── model_training.ipynb
     │   └── helpers.py          
     │                         
     │
-    ├── hisia                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes hisia a Python module
+    ├── hisia              <-   Source code for use in this project.
+    │   ├── __init__.py    <-   Makes hisia a Python module
+    │   ├── hisia.py       <-   hisia a sentiment predictor and explainer
     │   │
-    │   ├── data           <- Path to training and validating dataset and stopwords
+    │   ├── data           <-  Path to training and validating dataset and stopwords: data folder is inside hisia for retrain
     │   │   └── data.json
+    │   │   └── data_custom.json
     │   │   └── stops.pkl
     │   │
-    │   ├── models         <- Helpers, frozen model, models trainer, and hisia
-    │   │   │                 predictions scripts
+    │   ├── models         <-  Helpers, frozen model, models trainer
+    │   │   │                 
     │   │   ├── base_model.pkl
     │   │   ├── helpers.py
-    │   │   ├── hisia.py
     │   │   └── train_model.py
     │   │
     │   └── visualization  <-  Results oriented visualizations
     │       └── ROC.png
     │       └── ROC_test.png
     │
-    ├── tests             <- Path to tests to check models accurance, datatypes, scikit-learn version
+    ├── tests              <-   Path to tests to check models accurance, datatypes, scikit-learn version
     │   ├── __init__.py
     │   ├── conftest.py
     │   ├── test_basemodel_results.py
@@ -99,3 +100,5 @@ Project Organization
 
 
 --------
+# Retrain and Test: For Developers
+Coming Soon
