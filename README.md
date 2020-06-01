@@ -51,7 +51,7 @@ HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth los
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
 
-:warning: **Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location.
+:warning: **Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory, if the files do not exits** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation: Use the same location to run this sentiment analyzer**
 
 Features
 --------
