@@ -1,21 +1,15 @@
 [tool.poetry]
 name = "hisia"
 version = "0.1.0"
-description = "Danish sentiment analysis using scikit-learn and Trustpilot dataset"
+description = "A Danish sentiment analysis using scikit-learn"
 authors = [
     "Prayson W. Daniel <praysonwilfred@gmail.com>"
 ]
 license = "MIT"
-
+repository = "https://github.com/Proteusiq/hisia"
 readme = "README.md"
 
 keywords = ["nlp", "machine_learning","danish","sentiment"]
-
-classifiers = [
-    "Topic :: Sentiment Analysis :: Danish Models",
-    "Topic :: NLP :: Libraries :: Python Modules"
-]
-
 
 
 [tool.poetry.dependencies]
