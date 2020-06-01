@@ -1,6 +1,7 @@
 Hisia
 ==============================
 
+:blush: :smiley: :relaxed: :smirk: :flushed: :worried: :frowning: :disappointed: :angry: :persevere: 
 Danish sentiment analysis using scikit-learn LogisticRegression
 
 ![hisia cover](cover_image.png)
@@ -47,6 +48,8 @@ HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth los
  >8*10 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
+
+:warning: Running `from hisia import Hisia` will move the create a directory hisia with model/base_model.pkl and data/stops.pkl on the current directory. Until now, I cannot figure out how I can package that with `poetry`.
 
 Features
 --------
