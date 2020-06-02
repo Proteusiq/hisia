@@ -50,12 +50,12 @@ Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient 
 
 HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth loss 'modified_huber as loss function and L2 penalty. Test score **accuracy 94%** and **recall of 94%**. SGDClassifier was select because of partial_fit. It allows batch/online training.
 
-**Note:** This score reflects models in regards to TrustPilot reviews style of writing.<b>
+**Note:** This score reflects models in regards to TrustPilot reviews style of writing.<br>
  > 8x20 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
 
-:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory, if the files do not exits** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation:** Use the same location to run this sentiment analyzer.
+:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory, if the files do not exits.** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation:** Use the same location to run this sentiment analyzer.
 
 Features
 --------
