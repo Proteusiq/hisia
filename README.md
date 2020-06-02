@@ -46,7 +46,7 @@ python -m pip install --user hisia
 **Data:** 2016 TrustPilot's 254,464 Danish reviews' body and stars and [8 fake reviews]*20 see notes for explanation.<br>
 
 **Models**<br>
-Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient (SAG) as a solver, L2 penalty was select for the base model. Test score **accuracy is ca. 93%** and **recall of 93%**. SAGA is a faster solver for large datasets (rows and columns wise). As stochastic gradient, the memory of the previous gradient is incorporated/feed-forward current epoch. This allows a faster convergence rate. Seeds: 42 in data split of 80% training, 20% test, and 42 in the model used for reproducibility. Check notebooks for other parameters.
+Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient (SAG), as a solver, L2 penalty was select for the base model. Test score **accuracy is ca. 93%** and **recall of 93%**. SAGA was selected because it is a faster solver for large datasets (rows and columns wise). As stochastic gradient, the memory of the previous epoch gradient is incorporated/feed-forward to the current epoch. This allows a faster convergence rate. Seeds: 42 in data split of 80% training, 20% test, and 42 in the model used for reproducibility. Check notebooks for other parameters.
 
 HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth loss 'modified_huber as loss function and L2 penalty. Test score **accuracy 94%** and **recall of 94%**. SGDClassifier was select because of partial_fit. It allows batch/online training.
 
@@ -114,6 +114,11 @@ _"All models are wrong, but some are useful"_ There is no magic. Expect the mode
 
 Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** I am working of fixing it.
 
+# TODO
+- [ ] Use Danish BERT for feature extraction inside of Scikit-Learn Transformers
+- [ ] Fix path to the model issue
+- [ ] Remove more useless words (stop_words)
+- [ ] Finish HisiaTrainer
 
 # Retrain and Test: For Developers
 Coming Soon
