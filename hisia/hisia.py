@@ -77,7 +77,6 @@ class Hisia(HisiaLoad):
         text {str} -- text to analyze
         model_path {str} -- path to the trained model (default: {None})
 
-    
     ...
 
     Attributes
@@ -87,7 +86,7 @@ class Hisia(HisiaLoad):
     nmodel : str
         a loaded model
 
-    
+
     Property
     -------
     sentiment
