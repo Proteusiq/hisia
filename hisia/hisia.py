@@ -1,22 +1,41 @@
 from abc import ABC, abstractproperty
 from collections import namedtuple
+import typing as t
+import dill
 import numpy as np
 import pandas as pd
 from loguru import logger
-#from helpers import persist_model
+
+
+SentimentType = t.NamedTuple('Sentiment', [('sentiment',str),('positive_probability',float), ('negative_probability',float)])
+Sentiment = namedtuple('Sentiment', ['sentiment','positive_probability', 'negative_probability'])
+
 
 @logger.catch
-def persist_model(name,clf=None, method='load'):
-    'Pass in the file name, object to be saved or loaded'
-    import dill
+def persist_model(name:str,clf=None, method:str='load')->None:
+    """Persist Model
+     Function use to save or load model
+
+    Arguments:
+        name {str} -- name of the saved model
+
+    Keyword Arguments:
+        clf {trained model} -- required only during save (default: {None})
+        method {str} -- [takes in 'load' or 'save' argument to load or save models] (default: {'load'})
+
+    Raises:
+        ValueError: [raised when the arguments are not correct]
+    """
     
     if method == 'load':
         with open(name,'rb') as f:
             return dill.load(f)
+
     elif method == 'save':
         logger.info(f'[+] Persisting {name} ...')
         if clf is None:
             raise ValueError('Pass Model/Pipeline/Transformation')
+
         with open(name,'wb') as f:
             dill.dump(clf,f)
             logger.info(f'[+] Persistence Complete. Model {name} is saved')
@@ -25,15 +44,22 @@ def persist_model(name,clf=None, method='load'):
 
 
 MODEL_PATH='hisia/models/base_model.pkl'
-pre_load_model = persist_model(MODEL_PATH, method='load')
-Sentiment = namedtuple('Sentiment', ['sentiment','positive_probability', 'negative_probability'])
+PRE_LOAD_MODEL = persist_model(MODEL_PATH, method='load')
 
 
 class HisiaLoad(ABC):
-    def __init__(self, model_path=None):
+    def __init__(self, model_path:str=None):
+        """Factory Class
+        
+        This is used to ensure a single model loading instance
+        and a abstract property sentiment that is overiden in child classes
+      
+        Keyword Arguments:
+            model_path {str} -- path to the trained model (default: {None})
+        """
     
         if model_path is None:
-            self.model = pre_load_model
+            self.model = PRE_LOAD_MODEL
         else:
             self.model = persist_model(model_path, method='load') 
 
@@ -45,7 +71,43 @@ class HisiaLoad(ABC):
         pass
 
 class Hisia(HisiaLoad):
-    def __init__(self, text, model_path=None):
+    """Hisia
+
+    Keyword Arguments:
+        text {str} -- text to analyze
+        model_path {str} -- path to the trained model (default: {None})
+
+    
+    ...
+
+    Attributes
+    ----------
+    text : str
+        a text to analyze
+    nmodel : str
+        a loaded model
+
+    
+    Property
+    -------
+    sentiment
+        returns the sentiment of text
+
+    explain
+        returns a dictionary of sentiment score explanation 
+        calculation decission = W1(word1) + W2(word2) + .. + intercept 
+
+    Usage:
+    ```python
+    from hisia import Hisia
+
+    positive_gro = Hisia('det var super deligt')
+    print(positive_gro.sentiment)
+    print(positive_gro.explain)
+    ```
+    """
+
+    def __init__(self, text:str, model_path:str=None):
         super().__init__(model_path)
         self.text = text
         self.sentiment
@@ -56,7 +118,7 @@ class Hisia(HisiaLoad):
                 f'negative_probability={self.sentiment.negative_probability})')
 
     @property
-    def sentiment(self):
+    def sentiment(self)->SentimentType:
         
         if isinstance(self.text, str):
             self.X = [self.text]
@@ -72,7 +134,8 @@ class Hisia(HisiaLoad):
         return self.results
 
     @property
-    def explain(self):
+    def explain(self)-> t.Dict[str,float]:
+        
         feature_names = self.model.named_steps['count_verctorizer'].get_feature_names()
         best_features = [feature_names[i] for i in \
                         self.model.named_steps['feature_selector'].get_support(indices=True)]
@@ -91,34 +154,3 @@ class Hisia(HisiaLoad):
                 'features': {look_table[item] for item in v}
         }
         
-
-
-
-
-
-class HisiaRetrainable(HisiaLoad):
-    '''Base Model that is retrainable
-    '''
-    def __init__(self, text, model_path=None):
-        super().__init__(model_path)
-        self.text = text
-        self.sentiment
-
-    @property
-    def sentiment(self):
-        pass
-
-    def train(self, X, y):
-        pass
-
-    def reenforce(self,X, y, weight=None):
-        pass
-
-    def predict(self, X):
-        pass
-
-    def predict_proba(self, X):
-        pass
-
-    def score(self, X,y):
-        pass
