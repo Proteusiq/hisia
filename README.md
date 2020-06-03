@@ -38,7 +38,7 @@ positive_gro.explain
 _Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install for PyPI. :) 
 
 ```bash
-pip install hisia
+python -m pip install --user hisia
 ```
 
 ### Data and Models Used in Hisia
@@ -46,16 +46,16 @@ pip install hisia
 **Data:** 2016 TrustPilot's 254,464 Danish reviews' body and stars and [8 fake reviews]*20 see notes for explanation.<br>
 
 **Models**<br>
-Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient (SAG) as a solver, L2 penalty was select for the base model. Test score **accuracy is ca. 93%** and **recall of 93%**. SAGA is a faster solver for large datasets (rows and columns wise). As stochastic gradient, the memory of the previous gradient is incorporated/feed-forward current epoch. This allows a faster convergence rate. Seeds: 42 in data split of 80% training, 20% test, and 42 in the model used for reproducibility. Check notebooks for other parameters.
+Hisia, _LogisticRegression_ with SAGA, a variant of Stochastic Average Gradient (SAG), as a solver, L2 penalty was select for the base model. Test score **accuracy is ca. 93%** and **recall of 93%**. SAGA was selected because it is a faster solver for large datasets (rows and columns wise). As stochastic gradient, the memory of the previous epoch gradient is incorporated/feed-forward to the current epoch. This allows a faster convergence rate. Seeds: 42 in data split of 80% training, 20% test, and 42 in the model used for reproducibility. Check notebooks for other parameters.
 
 HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth loss 'modified_huber as loss function and L2 penalty. Test score **accuracy 94%** and **recall of 94%**. SGDClassifier was select because of partial_fit. It allows batch/online training.
 
-**Note:** This score reflects models in regards to TrustPilot reviews style of writing.<b>
- >8\*10 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
+**Note:** This score reflects models in regards to TrustPilot reviews style of writing.<br>
+ > 8x20 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
 
 Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
 
-:warning: **Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory, if the files do not exits** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation: Use the same location to run this sentiment analyzer**
+:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory, if the files do not exits.** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation:** Use the same location to run this sentiment analyzer.
 
 Features
 --------
@@ -114,6 +114,11 @@ _"All models are wrong, but some are useful"_ There is no magic. Expect the mode
 
 Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** I am working of fixing it.
 
+# TODO
+- [ ] Use Danish BERT for feature extraction inside of Scikit-Learn Transformers
+- [ ] Fix path to the model issue
+- [ ] Remove more useless words (stop_words)
+- [ ] Finish HisiaTrainer
 
 # Retrain and Test: For Developers
 Coming Soon
