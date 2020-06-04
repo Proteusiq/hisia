@@ -116,6 +116,7 @@ _"All models are wrong, but some are useful"_ There is no magic. Expect the mode
 Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** I am working of fixing it.
 
 # TODO
+- [ ] Benchmark AFINN and Hisia on Non-Trustpilot data
 - [ ] Use Danish BERT for feature extraction inside of Scikit-Learn Transformers
 - [ ] Fix path to the model issue
 - [ ] Remove more useless words (stop_words)
