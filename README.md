@@ -55,7 +55,7 @@ HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth los
 
 Notebook folder contains playground [model_train notebook](https://github.com/Proteusiq/hisia/blob/master/notebooks/model_training.ipynb) to reproduce the model scores and also explore what the model has learned. Same parameters and data used to train Hisia.
 
-:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it on the current directory, if the files do not exits.** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation:** Use the same location to run this sentiment analyzer.
+:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it onto the current directory, if the files do not exits.** Until now, I cannot figure out how to package this library with `poetry` in the way to it correctly find the model and stopwards. **Recommendation:** Use the same folder/location to run this sentiment analyzer.
 
 Features
 --------
@@ -113,7 +113,7 @@ Project Organization
 # Bugs and Errors: 6% Expected Error
 _"All models are wrong, but some are useful"_ There is no magic. Expect the model to make very basic mistakes. To help in training a better model, post an issue with the sentence and expected results, and model results. Because of data limitation, this model performs very well in relationship to products or companies reviews, but limited outside those domain.
 
-Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it on the current directory.** I am working of fixing it.
+Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it onto the current directory.** I am working of fixing it.
 
 # TODO
 - [X] Benchmark AFINN and Hisia on Non-Trustpilot data: [comparison results](https://github.com/Proteusiq/hisia/blob/master/notebooks/afinn_hisia_comparison.ipynb)
