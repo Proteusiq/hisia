@@ -74,7 +74,7 @@ Project Organization
     │
     ├── notebooks          <-  Jupyter notebook. Reproduce the results, show model explanations, and compare with afinn
     │   └── model_training.ipynb
-    │   └── afinn_hisia_comparision.ipynb
+    │   └── afinn_hisia_comparison.ipynb
     │   └── helpers.py          
     │                         
     │
