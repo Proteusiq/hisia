@@ -35,7 +35,7 @@ positive_gro.explain
 # }
 ```
 ### Hisia (Emotions)
-_Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install for PyPI. :) 
+_Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install from PyPI. :) 
 
 ```bash
 python -m pip install --user hisia
@@ -53,9 +53,9 @@ HisiaTrain, _SGDClassifier_, Stochastic Gradient Descent learner with smooth los
 **Note:** This score reflects models in regards to TrustPilot reviews style of writing.<br>
  > 8x20 fake reviews. TrustPilot reviews are directed towards products and services. A word like 'elsker'(love) or 'hader'(hate) were rare. To make sure the model learns such relationship, I added 8 reviews and duplicated them 20 times. These new sentences did not increase or decrease the model accuracy but correctly added the coefficient of the words love, hate and not bad (ikke dårligt). 
 
-Notebook folder contains model_train notebook as a playground to reproduce the scores and also explore what the model has learned.
+Notebook folder contains playground [model_train notebook](https://github.com/Proteusiq/hisia/blob/master/notebooks/model_training.ipynb) to reproduce the model scores and also explore what the model has learned. Same parameters and data used to train Hisia.
 
-:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory, if the files do not exits.** Until now, I cannot figure out how I can package this library with `poetry` and direct to correct location. **Recommendation:** Use the same location to run this sentiment analyzer.
+:warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it onto the current directory, if the files do not exits.** Until now, I cannot figure out how to package this library with `poetry` in the way to it correctly find the model and stopwards. **Recommendation:** Use the same folder/location to run this sentiment analyzer.
 
 Features
 --------
@@ -113,10 +113,10 @@ Project Organization
 # Bugs and Errors: 6% Expected Error
 _"All models are wrong, but some are useful"_ There is no magic. Expect the model to make very basic mistakes. To help in training a better model, post an issue with the sentence and expected results, and model results. Because of data limitation, this model performs very well in relationship to products or companies reviews, but limited outside those domain.
 
-Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `data/stops.pkl` in it on the current directory.** I am working of fixing it.
+Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it onto the current directory.** I am working of fixing it.
 
 # TODO
-- [X] Benchmark AFINN and Hisia on Non-Trustpilot data
+- [X] Benchmark AFINN and Hisia on Non-Trustpilot data: [comparison results](https://github.com/Proteusiq/hisia/blob/master/notebooks/afinn_hisia_comparison.ipynb)
 - [ ] Use Danish BERT for feature extraction inside of Scikit-Learn Transformers
 - [ ] Fix path to the model issue
 - [ ] Remove more useless words (stop_words)
