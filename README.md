@@ -35,7 +35,7 @@ positive_gro.explain
 # }
 ```
 ### Hisia (Emotions)
-_Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install for PyPI. :) 
+_Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install from PyPI. :) 
 
 ```bash
 python -m pip install --user hisia
