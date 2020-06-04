@@ -72,7 +72,7 @@ Project Organization
     ├── LICENSE
     ├── README.md         
     │
-    ├── notebooks          <-  Jupyter notebook. Reproduce the results, show model explanations, and compare with afinn
+    ├── notebooks          <-  Jupyter notebook. Reproduce the results, show model explanations, and comparing with afinn
     │   └── model_training.ipynb
     │   └── afinn_hisia_comparison.ipynb
     │   └── helpers.py          
