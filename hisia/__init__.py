@@ -4,7 +4,7 @@
 from pathlib import Path
 
 store_model = Path.cwd() / 'hisia/models/base_model.pkl'
-store_stops = Path.cwd() / 'hisia/data/stops.pkl'
+store_stops = Path.cwd() / 'hisia/mdoels/data/stops.pkl'
 
 if not store_model.exists():
     from shutil import move
