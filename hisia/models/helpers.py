@@ -5,7 +5,7 @@ import lemmy
 from loguru import logger
 
 
-STOP_WORDS = joblib.load('hisia/data/stops.pkl')
+STOP_WORDS = joblib.load('hisia/models/data/stops.pkl')
 lemmatizer = lemmy.load('da')
 
 @logger.catch
@@ -116,7 +116,7 @@ def show_diagram(trained_clf, X_train, y_train, X_test, y_test, compare_test=Tru
     plt.title('{}'.format(title))
     plt.legend(loc="lower right")
     plt.show()
-    plt.savefig('visualization/ROC.png')
+    plt.savefig('hisia/visualization/ROC.png')
 
 # Function modification of Mike Lee Williams(mike@mike.place)
 def show_most_informative_features(feature_names, clf, n=1000):
