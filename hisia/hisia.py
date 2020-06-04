@@ -5,6 +5,8 @@ import dill
 import numpy as np
 import pandas as pd
 from loguru import logger
+from sklearn.pipeline import Pipeline
+
 
 
 SentimentType = t.NamedTuple('Sentiment', [('sentiment',str),('positive_probability',float), ('negative_probability',float)])
@@ -12,7 +14,7 @@ Sentiment = namedtuple('Sentiment', ['sentiment','positive_probability', 'negati
 
 
 @logger.catch
-def persist_model(name:str,clf=None, method:str='load')->None:
+def persist_model(name:str,clf:Pipeline=None, method:str='load')->None:
     """Persist Model
      Function use to save or load model
 
@@ -83,8 +85,8 @@ class Hisia(HisiaLoad):
     ----------
     text : str
         a text to analyze
-    nmodel : str
-        a loaded model
+    nmodel : Pipeline
+        a loaded model as a scikit-learn pipeline with both features transformers and classifier
 
 
     Property

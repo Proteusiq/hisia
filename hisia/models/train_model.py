@@ -25,8 +25,8 @@ from hisia.models.helpers import show_most_informative_features
 
 logger.info('[+] Model Training\n\n\tData Loading and spliting dataset')
 
-df = pd.read_json('hisia/data/data.json')
-dt = pd.read_json('hisia/data/data_custom.json')
+df = pd.read_json('data/data.json')
+dt = pd.read_json('data/data_custom.json')
 
 
 logger.info('[+] Dataset')

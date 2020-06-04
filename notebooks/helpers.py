@@ -4,7 +4,7 @@ import dill
 import lemmy
 
 
-STOP_WORDS = joblib.load('../hisia/data/stops.pkl')
+STOP_WORDS = joblib.load('../data/stops.pkl')
 lemmatizer = lemmy.load('da')
 
 def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
