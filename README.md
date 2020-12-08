@@ -57,6 +57,10 @@ Notebook folder contains playground [model_train notebook](https://github.com/Pr
 
 :warning:**Running `from hisia import Hisia` will create a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it onto the current directory, if the files do not exits.** Until now, I cannot figure out how to package this library with `poetry` in the way to it correctly find the model and stopwards. **Recommendation:** Use the same folder/location to run this sentiment analyzer.
 
+# News & Updates
+
+Hisia is part of [sprogteknologi.dk](https://sprogteknologi.dk/dataset/hisia) tools
+
 Features
 --------
 - Sentiment analysis
