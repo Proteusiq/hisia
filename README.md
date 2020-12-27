@@ -122,7 +122,7 @@ Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and
 # TODO
 - [X] Benchmark AFINN and Hisia on Non-Trustpilot data: [comparison results](https://github.com/Proteusiq/hisia/blob/master/notebooks/afinn_hisia_comparison.ipynb)
 - [ ] Use Danish BERT for feature extraction inside of Scikit-Learn Transformers
-- [ ] Fix path to the model issue
+- [X] Fix path to the model issue
 - [ ] Remove more useless words (stop_words)
 - [ ] Finish HisiaTrainer
 
