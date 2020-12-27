@@ -116,7 +116,6 @@ Project Organization
 # Bugs and Errors: 6% Expected Error
 _"All models are wrong, but some are useful"_ There is no magic. Expect the model to make very basic mistakes. To help in training a better model, post an issue with the sentence and expected results, and model results. Because of data limitation, this model performs very well in relationship to products or companies reviews, but limited outside those domain.
 
-Known issue: **Running `from hisia import Hisia` creates a directory `hisia` and move with `model/base_model.pkl` and `model/data/stops.pkl` in it onto the current directory.** I am working of fixing it.
 
 # TODO
 - [X] Benchmark AFINN and Hisia on Non-Trustpilot data: [comparison results](https://github.com/Proteusiq/hisia/blob/master/notebooks/afinn_hisia_comparison.ipynb)
