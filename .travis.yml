@@ -6,4 +6,4 @@ before_install:
   - docker pull python
 
 script:
-  - echo "pip install hisia" | docker run -it python bash
+  - docker run -it python python -m pip install hisia
