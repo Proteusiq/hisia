@@ -37,5 +37,5 @@ jobs:
         run: poetry install
         if: steps.cache.outputs.cache-hit != 'true'
 
-      - name: Run pytest
+    - name: Run pytest
         run: PYTHONPATH=src/ poetry run python -m pytest -v tests/
