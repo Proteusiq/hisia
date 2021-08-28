@@ -15,7 +15,7 @@ def test_base_model_score(test_data):
     
     assert model.score(X_test, y_test) > 0.93, 'Model score is lower than 93%'
 
-examples = [("Jeg elsker pizza :(", "positive"), ("Jeg elsker ikke pizza :(", "negative")]
+examples = [("Jeg elsker pizza :)", "positive"), ("Jeg elsker slet ikke pizza :(", "negative")]
 @pytest.mark.parametrize("text,prediction", examples)
 def test_base_model(text, prediction):
     # Test the model score on test
