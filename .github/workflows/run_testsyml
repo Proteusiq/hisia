@@ -24,6 +24,8 @@ jobs:
           python-version: 3.7
 
       - name: Install Poetry
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         uses: dschep/install-poetry-action@v1.2
 
       - name: Cache Poetry virtualenv
