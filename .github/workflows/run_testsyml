@@ -32,10 +32,9 @@ jobs:
           restore-keys: |
             poetry-$
 
-
-    - name: Install Dependencies using Poetry
+      - name: Install Dependencies using Poetry
         run: poetry install
         if: steps.cache.outputs.cache-hit != 'true'
 
-    - name: Run pytest
-        run: PYTHONPATH=src/ poetry run python -m pytest -v tests/
+      - name: Run pytest
+        run: PYTHONPATH=hisia/ poetry run python -m pytest -v tests/
