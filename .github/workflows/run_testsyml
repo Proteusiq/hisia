@@ -26,7 +26,7 @@ jobs:
       - name: Install Poetry
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-        uses: dschep/install-poetry-action@v1.2
+        uses: dschep/install-poetry-action@v2.0.0
 
       - name: Cache Poetry virtualenv
         uses: actions/cache@v1
