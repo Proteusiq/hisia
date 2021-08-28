@@ -1,3 +1,4 @@
+import pytest
 from hisia import Hisia
 
 
@@ -14,15 +15,9 @@ def test_base_model_score(test_data):
     
     assert model.score(X_test, y_test) > 0.93, 'Model score is lower than 93%'
 
-def test_base_model_positive():
+examples = [("Jeg elsker pizza :(", "positive"), ("Jeg elsker ikke pizza :(", "negative")]
+@pytest.mark.parametrize("text,prediction", examples)
+def test_base_model(text, prediction):
     # Test the model score on test
-    text = Hisia('Jeg elsker pizza :)')
-    assert text.sentiment.sentiment == 'positive', 'model failed basic positive score'
-
-def test_base_model_negative():
-    # Test the model score on test
-    text = Hisia('Jeg elsker ikke pizza :(')
-    assert text.sentiment.sentiment == 'negative', 'model failed basic negative score'
-
-
-
+    text = Hisia(text)
+    assert text.sentiment.sentiment == prediction, f'model failed basic {prediction} score'
