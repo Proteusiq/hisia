@@ -4,6 +4,11 @@
 name: Python application
 
 on:
+
+  schedule:
+  # Run everyday at 6:00 AM
+  - cron: "0 6 * * *"
+
   push:
     branches: [ master ]
   pull_request:
@@ -43,3 +48,8 @@ jobs:
 
       - name: Run pytest
         run: PYTHONPATH=hisia/ poetry run python -m pytest -v tests/
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
