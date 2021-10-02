@@ -6,7 +6,7 @@ import dill
 import lemmy
 from loguru import logger
 import matplotlib.pyplot as plt
-from sklearn.metrics import roc_curve, auc, classification_report
+from sklearn.metrics import roc_curve, classification_report
 
 
 STOP_WORDS_PATH = Path(__file__).parent / "data/stops.pkl"
@@ -20,6 +20,9 @@ def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     if stop_words is None:
         stop_words = {}
 
+    stop_words.update(
+        {"kilometer",}
+    )
     blob = blob.lower()
 
     # eyes [nose] mouth | mouth [nose] eyes pattern
@@ -51,6 +54,9 @@ def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     remove_stopwords = " ".join(word for word in lemmatized_text if len(word) > 1)
 
     if remove_digits:
+        STOP_WORDS.update(
+            {"kilometer",}
+        )
         remove_stopwords = re.sub(r"\b\d+\b", "", remove_stopwords)
 
     # remove extra spaces
@@ -93,25 +99,21 @@ def show_diagram(trained_clf, X_train, y_train, X_test, y_test, compare_test=Tru
 
     plt.figure(figsize=(10, 5))
 
-    title = "Receiver operating characteristic"
     data = [[X_test, y_test, "red", "Test"], [X_train, y_train, "blue", "Train"]]
 
-    for i, j in enumerate(data):
+    for row in data:
+        X, y, color, split = row
+        y_pred_prob = trained_clf.predict_proba(X)[:, 1]
+        clf_score = trained_clf.score(X, y)
 
-        y_pred, y_pred_prob = (
-            trained_clf.predict(j[0]),
-            trained_clf.predict_proba(j[0])[:, 1],
-        )
-        clf_score = trained_clf.score(j[0], j[1])
-
-        fpr, tpr, _ = roc_curve(j[1], y_pred_prob)  # remember we need binary
+        fpr, tpr, _ = roc_curve(y, y_pred_prob)  # remember we need binary
 
         plt.plot(
             fpr,
             tpr,
             lw=4,
-            color=j[2],
-            label="{} ROC curve (area ={:.2f})".format(j[3], clf_score),
+            color=color,
+            label=f"{split} ROC curve (area ={clf_score:.2f})",
         )
 
         if not compare_test:
@@ -122,7 +124,7 @@ def show_diagram(trained_clf, X_train, y_train, X_test, y_test, compare_test=Tru
     plt.ylim([0.0, 1.05])
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
-    plt.title("{}".format(title))
+    plt.title("Receiver operating characteristic")
     plt.legend(loc="lower right")
     plt.show()
     plt.savefig("hisia/visualization/ROC.png")

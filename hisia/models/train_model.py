@@ -1,19 +1,11 @@
-import joblib
-import re
-import dill
-import lemmy
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from pathlib import Path
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import SelectKBest
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegressionCV
 from loguru import logger
@@ -28,6 +20,20 @@ logger.info("[+] Model Training\n\n\tData Loading and spliting dataset")
 
 df = pd.read_json("data/data.json")
 dt = pd.read_json("data/data_custom.json")
+
+logger.info("[+] \n\n\tAdding SAM Data. Droping Zero Score")
+SAM = (
+    "https://raw.githubusercontent.com/"
+    "steffan267/Sentiment-Analysis-on-Danish-Social-Media/master/all_sentences.csv"
+)
+sam = pd.read_csv(SAM, names=["target", "features"])
+sam = (sam
+  .loc[lambda d: d['target'].ne(0)]
+  .assign(target= lambda d: np.where(d["target"].gt(0), 1, 0))
+       
+)[['features', 'target']]
+
+dt = dt.append(sam ,ignore_index=True)
 
 
 logger.info("[+] Dataset")
@@ -66,7 +72,7 @@ hisia = Pipeline(
                 cv=5,
                 solver="saga",
                 scoring="accuracy",
-                max_iter=200,
+                max_iter=500,
                 n_jobs=-1,
                 random_state=42,
                 verbose=0,
@@ -77,7 +83,7 @@ hisia = Pipeline(
 
 logger.info("Cleaning, feature engineering and Training Logistic Regression in 5 CVs")
 logger.info(f"Model Steps:\n\t{hisia}")
-logger.info("\n[+] This will take ca. 3-4 minutes. Ignore Convergence Warning")
+logger.info("\n[+] This will take ca. 3-4 minutes. Ignore for Convergence Warning")
 logger.info("-" * 75)
 hisia.fit(X_train, y_train)
 
@@ -88,7 +94,7 @@ logger.info(
 )
 logger.info("[+] Generating ROC digrams")
 show_diagram(hisia, X_train, y_train, X_test, y_test, compare_test=True)
-feature_names = hisia.named_steps["count_verctorizer"].get_feature_names()
+feature_names = hisia.named_steps["count_verctorizer"].get_feature_names_out()
 best_features = [
     feature_names[i]
     for i in hisia.named_steps["feature_selector"].get_support(indices=True)
