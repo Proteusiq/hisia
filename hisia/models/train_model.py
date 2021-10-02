@@ -12,6 +12,7 @@ from loguru import logger
 
 
 from hisia.models.helpers import tokenizer
+from hisia.models.helpers import STOP_WORDS
 from hisia.models.helpers import persist_model
 from hisia.models.helpers import show_diagram
 from hisia.models.helpers import show_most_informative_features
@@ -27,13 +28,13 @@ SAM = (
     "steffan267/Sentiment-Analysis-on-Danish-Social-Media/master/all_sentences.csv"
 )
 sam = pd.read_csv(SAM, names=["target", "features"])
-sam = (sam
-  .loc[lambda d: d['target'].ne(0)]
-  .assign(target= lambda d: np.where(d["target"].gt(0), 1, 0))
-       
-)[['features', 'target']]
+sam = (
+    sam.loc[lambda d: d["target"].ne(0)].assign(
+        target=lambda d: np.where(d["target"].gt(0), 1, 0)
+    )
+)[["features", "target"]]
 
-dt = dt.append(sam ,ignore_index=True)
+dt = dt.append(sam, ignore_index=True)
 
 
 logger.info("[+] Dataset")
@@ -61,7 +62,10 @@ hisia = Pipeline(
         (
             "count_verctorizer",
             CountVectorizer(
-                ngram_range=(1, 2), max_features=150000, tokenizer=tokenizer,
+                ngram_range=(1, 2),
+                max_features=150000,
+                tokenizer=tokenizer,
+                stop_words=STOP_WORDS,
             ),
         ),
         ("feature_selector", SelectKBest(chi2, k=10000)),
@@ -83,7 +87,9 @@ hisia = Pipeline(
 
 logger.info("Cleaning, feature engineering and Training Logistic Regression in 5 CVs")
 logger.info(f"Model Steps:\n\t{hisia}")
-logger.info("\n[+] This will take ca. 3-4 minutes. Ignore for Convergence Warning")
+logger.info(
+    "\n[+] This will take ca. 3-4 minutes. Ignore for Convergence Warning and StopWprds inconsistency"
+)
 logger.info("-" * 75)
 hisia.fit(X_train, y_train)
 

@@ -61,10 +61,10 @@ PRE_LOAD_MODEL = persist_model(f"{MODEL_PATH}", method="load")
 class HisiaLoad(ABC):
     def __init__(self, model_path: str = None):
         """Factory Class
-        
+
         This is used to ensure a single model loading instance
         and a abstract property sentiment that is overiden in child classes
-      
+
         Keyword Arguments:
             model_path {str} -- path to the trained model (default: {None})
         """
@@ -105,8 +105,8 @@ class Hisia(HisiaLoad):
         returns the sentiment of text
 
     explain
-        returns a dictionary of sentiment score explanation 
-        calculation decission = W1(word1) + W2(word2) + .. + intercept 
+        returns a dictionary of sentiment score explanation
+        calculation decission = W1(word1) + W2(word2) + .. + intercept
 
     Usage:
     ```python
@@ -151,7 +151,9 @@ class Hisia(HisiaLoad):
     @property
     def explain(self) -> t.Dict[str, float]:
 
-        feature_names = self.model.named_steps["count_verctorizer"].get_feature_names()
+        feature_names = self.model.named_steps[
+            "count_verctorizer"
+        ].get_feature_names_out()
         best_features = [
             feature_names[i]
             for i in self.model.named_steps["feature_selector"].get_support(

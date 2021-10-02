@@ -8,9 +8,7 @@ STOP_WORDS = joblib.load("../hisia/models/data/stops.pkl")
 lemmatizer = lemmy.load("da")
 
 # Add more stopwords
-STOP_WORDS.update(
-    {"kilometer",}
-)
+STOP_WORDS.update({"kilometer", "alme", "bank", "brand", "dansk", "presi"})
 
 
 def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
@@ -56,6 +54,10 @@ def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     result = f"{remove_stopwords} {emoji}".encode("utf-8").decode("utf-8")
 
     return result.split()
+
+
+# direct use of stopwords
+STOP_WORDS = {lemmatizer.lemmatize("", word)[-1] for word in STOP_WORDS}
 
 
 def persist_model(name, clf=None, method="load"):

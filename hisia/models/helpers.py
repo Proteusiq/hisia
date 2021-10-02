@@ -13,6 +13,9 @@ STOP_WORDS_PATH = Path(__file__).parent / "data/stops.pkl"
 STOP_WORDS = joblib.load(STOP_WORDS_PATH)
 lemmatizer = lemmy.load("da")
 
+# Add more stopwords
+STOP_WORDS.update({"kilometer", "alme", "bank", "brand", "dansk", "presi"})
+
 
 @logger.catch
 def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
@@ -20,9 +23,6 @@ def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     if stop_words is None:
         stop_words = {}
 
-    stop_words.update(
-        {"kilometer",}
-    )
     blob = blob.lower()
 
     # eyes [nose] mouth | mouth [nose] eyes pattern
@@ -54,9 +54,6 @@ def tokenizer(blob, stop_words=STOP_WORDS, remove_digits=True):
     remove_stopwords = " ".join(word for word in lemmatized_text if len(word) > 1)
 
     if remove_digits:
-        STOP_WORDS.update(
-            {"kilometer",}
-        )
         remove_stopwords = re.sub(r"\b\d+\b", "", remove_stopwords)
 
     # remove extra spaces
