@@ -13,26 +13,31 @@ from hisia import Hisia
 
 negative_joe = Hisia('Det er simpelthen ikke okay :(')
 negative_joe.sentiment
-# Sentiment(sentiment='negative', positive_probability=0.01, negative_probability=0.99)
+# from hisia import Hisia
+
+negative_joe = Hisia('Det er simpelthen ikke okay :(')
+negative_joe.sentiment
+# Sentiment(sentiment='negative', positive_probability=0.008, negative_probability=0.992)
 negative_joe.explain
-# {'decision': -2.762615727464413, 
-# 'intercept': 0.9959111721097562, 
-# 'features': {:(', -4.334440323513933),
-#               ('ikke', -3.425370797679455), 
-#               ('simpelthen ikke', -1.6951652194361089),
-#               ('simpelthen', -2.702688329340911)}
+# {'decision': -4.8335798389992055,
+#  'intercept': 0.809727254639209,
+#  'features': {(':(', -4.36432604514099),
+#               ('ikke', -3.273671001915033),
+#               ('simpelthen', -2.450742871314483),
+#               ('simpelthen ikke', -1.9214388345665114)}
 # }
 
 positive_gro = Hisia('Det var ikke dårligt')
 positive_gro
-# Sentiment(sentiment=positive, positive_probability=0.707, negative_probability=0.293)
+# Sentiment(sentiment=positive, positive_probability=0.684, negative_probability=0.316)
 positive_gro.explain
-# {'decision': 0.8791611359368057, 
-# 'intercept': 0.9959111721097562, 
-# 'features': {('ikke dårlig', 5.141224438943983), 
-#              ('dårlig', -9.311879340739669), 
-#              ('ikke', -3.425370797679455)}
+# {'decision': 0.7739625583753332,
+#  'intercept': 0.809727254639209,
+#  'features': {('dårlig', -8.910130726393785),
+#              ('ikke', -3.273671001915033),
+#              ('ikke dårlig', 5.126914312204595)}
 # }
+
 ```
 ### Hisia (Emotions)
 _Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install from PyPI. :) 
