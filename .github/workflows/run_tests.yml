@@ -32,7 +32,7 @@ jobs:
       - name: Install Poetry
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-        uses: abatilo/actions-poetry@v2.0.0
+        uses: abatilo/actions-poetry
 
       - name: Cache Poetry virtualenv
         uses: actions/cache@v1
