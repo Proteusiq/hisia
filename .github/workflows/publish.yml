@@ -43,9 +43,7 @@ jobs:
 
       - name: Run Pre-commits and Tests
         run: |
-          poetry run pre-commit install
-          poetry run pre-commit run --all-files
-          PYTHONPATH=luga/ poetry run python -m pytest --verbose --runslow tests/
+          PYTHONPATH=luga/ poetry run python -m pytest --verbose tests/
   release:
     name: Release
     needs: qa
@@ -94,7 +92,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "dist/*"
-          token: ${{ secrets.LUGA_TOKEN }}
+          token: ${{ secrets.HISIA_TOKEN }}
           draft: false
           prerelease: steps.check-version.outputs.prerelease == 'true'
 
