@@ -27,5 +27,5 @@ def test_training_data_dtypes(training_data):
 
 def test_custom_training_data_shape(custom_training_data):
     # Assert the data is having the same number of rows and columns
-
-    assert custom_training_data.shape == (8 * 20, 3), "data is changed!"
+    # 9842 new data points
+    assert custom_training_data.shape == (8 * 20 + 9842, 3), "data is changed!"
