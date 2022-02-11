@@ -18,16 +18,30 @@ def test_base_model_score(test_data):
     assert model.score(X_test, y_test) > 0.93, "Model score is lower than 93%"
 
 
-examples = [
+sentiment_examples = [
     ("Jeg elsker pizza :)", "positive"),
     ("Jeg elsker slet ikke pizza :(", "negative"),
 ]
 
+explain_examples = [
+    ("Jeg elsker pizza :)", {":)", "elsker"}),
+    ("Jeg elsker slet ikke pizza :(", {":(", "elsker", "ikke", "slet", "slet ikke"}),
+]
 
-@pytest.mark.parametrize("text,prediction", examples)
-def test_base_model(text, prediction):
+
+@pytest.mark.parametrize("text,prediction", sentiment_examples)
+def test_base_sentiment(text, prediction):
     # Test the model score on test
     text = Hisia(text)
     assert (
         text.sentiment.sentiment == prediction
     ), f"model failed basic {prediction} score"
+
+
+@pytest.mark.parametrize("text,explanation", explain_examples)
+def test_base_explain(text, explanation):
+    # Test the model score on test
+    text = Hisia(text)
+    assert (
+        {feature for feature,_ in text.explain["features"]} == explanation
+    ), f"model failed basic explanation: {explanation}"
