@@ -45,3 +45,6 @@ def catch(f):
             raise e
 
     return wrap
+
+
+logger.catch = catch

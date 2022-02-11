@@ -8,7 +8,6 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
-from hisia.lazylogger import logger
 from hisia.models.helpers import (
     STOP_WORDS,
     persist_model,
@@ -16,6 +15,7 @@ from hisia.models.helpers import (
     show_most_informative_features,
     tokenizer,
 )
+from hisia.models.lazylogger import logger
 
 logger.info("[+] Model Training\n\n\tData Loading and spliting dataset")
 

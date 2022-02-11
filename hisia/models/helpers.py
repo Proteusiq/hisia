@@ -7,7 +7,7 @@ import lemmy
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, roc_curve
 
-from hisia.lazylogger import logger
+from hisia.models.lazylogger import logger
 
 STOP_WORDS_PATH = Path(__file__).parent / "data/stops.pkl"
 STOP_WORDS = joblib.load(STOP_WORDS_PATH)
