@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hisia"
-version = "0.3.3"
+version = "0.3.3.1"
 description = "A Danish sentiment analysis using scikit-learn"
 authors = [
     "Prayson W. Daniel <praysonwilfred@gmail.com>"
