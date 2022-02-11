@@ -171,7 +171,7 @@ class Hisia(HisiaLoad):
         v = self.model.named_steps["count_verctorizer"].transform(self.X)
         v = self.model.named_steps["feature_selector"].transform(v)
         v = pd.DataFrame.sparse.from_spmatrix(v)
-        v = set(v.loc[:, v.iloc[0] == 1].columns)
+        v = set(v.T.loc[v.eq(1).values[0]].index)
 
         return {
             "decision": self.model.decision_function(self.X)[0],
