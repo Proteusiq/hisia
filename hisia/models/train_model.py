@@ -1,21 +1,21 @@
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.feature_selection import chi2
-from sklearn.feature_selection import SelectKBest
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LogisticRegressionCV
-from loguru import logger
 
-
-from hisia.models.helpers import tokenizer
-from hisia.models.helpers import STOP_WORDS
-from hisia.models.helpers import persist_model
-from hisia.models.helpers import show_diagram
-from hisia.models.helpers import show_most_informative_features
+from hisia.models.helpers import (
+    STOP_WORDS,
+    persist_model,
+    show_diagram,
+    show_most_informative_features,
+    tokenizer,
+)
+from hisia.models.lazylogger import logger
 
 logger.info("[+] Model Training\n\n\tData Loading and spliting dataset")
 
@@ -29,9 +29,7 @@ SAM = (
 )
 sam = pd.read_csv(SAM, names=["target", "features"])
 sam = (
-    sam.loc[lambda d: d["target"].ne(0)].assign(
-        target=lambda d: np.where(d["target"].gt(0), 1, 0)
-    )
+    sam.loc[lambda d: d["target"].ne(0)].assign(target=lambda d: np.where(d["target"].gt(0), 1, 0))
 )[["features", "target"]]
 
 dt = dt.append(sam, ignore_index=True)
@@ -102,8 +100,7 @@ logger.info("[+] Generating ROC digrams")
 show_diagram(hisia, X_train, y_train, X_test, y_test, compare_test=True)
 feature_names = hisia.named_steps["count_verctorizer"].get_feature_names_out()
 best_features = [
-    feature_names[i]
-    for i in hisia.named_steps["feature_selector"].get_support(indices=True)
+    feature_names[i] for i in hisia.named_steps["feature_selector"].get_support(indices=True)
 ]
 predictor = hisia.named_steps["logistic_regression"]
 

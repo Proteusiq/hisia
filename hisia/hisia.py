@@ -1,13 +1,14 @@
+import typing as t
 from abc import ABC, abstractproperty
 from collections import namedtuple
 from pathlib import Path
-import typing as t
+
 import dill
 import numpy as np
 import pandas as pd
-from loguru import logger
 from sklearn.pipeline import Pipeline
 
+from hisia.models.lazylogger import logger
 
 SentimentType = t.NamedTuple(
     "Sentiment",
@@ -17,9 +18,7 @@ SentimentType = t.NamedTuple(
         ("negative_probability", float),
     ],
 )
-Sentiment = namedtuple(
-    "Sentiment", ["sentiment", "positive_probability", "negative_probability"]
-)
+Sentiment = namedtuple("Sentiment", ["sentiment", "positive_probability", "negative_probability"])
 
 
 @logger.catch
@@ -151,14 +150,10 @@ class Hisia(HisiaLoad):
     @property
     def explain(self) -> t.Dict[str, float]:
 
-        feature_names = self.model.named_steps[
-            "count_verctorizer"
-        ].get_feature_names_out()
+        feature_names = self.model.named_steps["count_verctorizer"].get_feature_names_out()
         best_features = [
             feature_names[i]
-            for i in self.model.named_steps["feature_selector"].get_support(
-                indices=True
-            )
+            for i in self.model.named_steps["feature_selector"].get_support(indices=True)
         ]
         coefficients = self.model.named_steps["logistic_regression"].coef_[0]
         index_range = range(len(best_features))

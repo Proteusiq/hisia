@@ -90,3 +90,9 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# poetry venv
+.venv
+
+# pyenv
+.python-version
