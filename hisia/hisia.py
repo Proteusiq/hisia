@@ -18,7 +18,9 @@ SentimentType = t.NamedTuple(
         ("negative_probability", float),
     ],
 )
-Sentiment = namedtuple("Sentiment", ["sentiment", "positive_probability", "negative_probability"])
+Sentiment = namedtuple(
+    "Sentiment", ["sentiment", "positive_probability", "negative_probability"]
+)
 
 
 @logger.catch
@@ -78,6 +80,10 @@ class HisiaLoad(ABC):
 
     @abstractproperty
     def sentiment(self):
+        pass
+
+    @abstractproperty
+    def explain(self):
         pass
 
 
@@ -150,10 +156,14 @@ class Hisia(HisiaLoad):
     @property
     def explain(self) -> t.Dict[str, float]:
 
-        feature_names = self.model.named_steps["count_verctorizer"].get_feature_names_out()
+        feature_names = self.model.named_steps[
+            "count_verctorizer"
+        ].get_feature_names_out()
         best_features = [
             feature_names[i]
-            for i in self.model.named_steps["feature_selector"].get_support(indices=True)
+            for i in self.model.named_steps["feature_selector"].get_support(
+                indices=True
+            )
         ]
         coefficients = self.model.named_steps["logistic_regression"].coef_[0]
         index_range = range(len(best_features))
