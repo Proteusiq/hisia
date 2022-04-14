@@ -4,7 +4,7 @@ Hisia
 :blush: :smiley: :relaxed: :yum: :wink: :smirk: :flushed: :worried: :frowning: :triumph: :disappointed: :angry: :persevere: :confounded: :shit: 
 
 
-A Danish sentiment analyzer using scikit-learn LogisticRegression
+A Danish sentiment analyser using scikit-learn LogisticRegression
 
 ![hisia cover](cover_image.png)
 
