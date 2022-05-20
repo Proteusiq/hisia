@@ -64,7 +64,7 @@ Notebook folder contains playground [model_train notebook](https://github.com/Pr
 
 # News & Updates
 
-Hisia is part of [sprogteknologi.dk](https://sprogteknologi.dk/dataset/hisia) tools
+Hisia is part of [sprogteknologi.dk](https://sprogteknologi.dk/dataset/hisia) tools <br>
 Comparing [Afinn (Lexicon) and Hisia (Logistic Regression)](https://github.com/Proteusiq/hisia/blob/master/notebooks/afinn_hisia_comparison.ipynb) scoring models
 
 
