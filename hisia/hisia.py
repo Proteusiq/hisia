@@ -94,7 +94,7 @@ class Hisia(HisiaLoad):
     ----------
     text : str
         a text to analyze
-    nmodel : Pipeline
+    [model_path] : Pipeline 
         a loaded model as a scikit-learn pipeline with both features transformers and classifier
 
 
