@@ -20,6 +20,7 @@ lemmy = "^2.1.0"
 dill = "0.3.4"
 matplotlib = "^3.2.1"
 dvc = "^2.28.0"
+dvc-gdrive = "^2.19.0"
 
 
 
