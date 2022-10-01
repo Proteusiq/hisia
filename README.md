@@ -127,7 +127,7 @@ _"All models are wrong, but some are useful"_ There is no magic. Expect the mode
 
 # TODO
 - [X] Benchmark AFINN and Hisia on Non-Trustpilot data: [comparison results](https://github.com/Proteusiq/hisia/blob/master/notebooks/afinn_hisia_comparison.ipynb)
-- [ ] Use Danish BERT for feature extraction inside of Scikit-Learn Transformers
+- [ ] <s>Use Danish BERT for feature extraction inside of Scikit-Learn Transformers</s> 
 - [X] Fix path to the model issue
 - [ ] Remove more useless words (stop_words)
 - [ ] Finish HisiaTrainer
