@@ -46,6 +46,13 @@ _Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it
 pip install -U hisia
 ```
 
+### Development:
+Getting the code and data
+```bash
+git clone git@github.com:Proteusiq/hisia.git && cd hisia
+poetry install && dvc pull 
+```
+
 ### Data and Models Used in Hisia
 
 **Data:** 2016 TrustPilot's 254,464 Danish reviews' body and stars and [8 fake reviews]*20 see notes for the explanation.<br>
