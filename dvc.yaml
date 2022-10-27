@@ -1,0 +1,23 @@
+stages:
+  data:
+    cmd: poetry run dvc pull
+  build:
+    cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
+    deps:
+      - data/data_custom.json
+      - data/data.json
+      - data/steffan267_SAM.json
+    # params:
+    #   - test_split
+    #   - vectorizer_max_features
+    #   - select_k_best
+    #   - lr_solver
+    #   - lr_scoring
+    # outs:
+    #   - hisia/models/base_model.pkl
+    metrics:
+      - hisia/metrics/classification_report.json:
+          cache: false
+    plots:
+      - hisia/reports/auc.json:
+          cache: false

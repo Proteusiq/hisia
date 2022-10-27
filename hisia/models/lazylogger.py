@@ -20,7 +20,9 @@ file_handler.setLevel(logging.DEBUG)
 
 # the formatters look
 fmt_stdout = "%(message)s"
-fmt_file = "[%(levelname)s] %(asctime)s | %(filename)s:%(funcName)s:%(lineno)d | %(message)s"
+fmt_file = (
+    "[%(levelname)s] %(asctime)s | %(filename)s:%(funcName)s:%(lineno)d | %(message)s"
+)
 
 stdout_formatter = logging.Formatter(fmt_stdout)
 file_formatter = logging.Formatter(fmt_file)

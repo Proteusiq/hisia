@@ -1,0 +1,4 @@
+schema: '2.0'
+stages:
+  data:
+    cmd: poetry run dvc pull

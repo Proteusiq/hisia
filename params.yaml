@@ -1,0 +1,17 @@
+base:
+  random_state: 42
+
+data:
+  stop_words: 'hisia/data/stops.pkl'
+  data_custom: 'data/data_custom.json'
+  data_trustpilot: 'data/data.json'
+  data_steffan267: 'data/steffan267_SAM.json'
+
+train:
+  test_size: 0.2
+  vectorizer_max_features: 150000
+  select_k_best: 1000
+  lr_solver: 'saga'
+  lr_scoring: 'accuracy'
+  lr_max_iter: 200
+  lr_verbose: 0

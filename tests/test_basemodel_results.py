@@ -42,6 +42,6 @@ def test_base_sentiment(text, prediction):
 def test_base_explain(text, explanation):
     # Test the model score on test
     text = Hisia(text)
-    assert (
-        {feature for feature,_ in text.explain["features"]} == explanation
-    ), f"model failed basic explanation: {explanation}"
+    assert {
+        feature for feature, _ in text.explain["features"]
+    } == explanation, f"model failed basic explanation: {explanation}"

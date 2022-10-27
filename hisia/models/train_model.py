@@ -29,10 +29,12 @@ SAM = (
 )
 sam = pd.read_csv(SAM, names=["target", "features"])
 sam = (
-    sam.loc[lambda d: d["target"].ne(0)].assign(target=lambda d: np.where(d["target"].gt(0), 1, 0))
+    sam.loc[lambda d: d["target"].ne(0)].assign(
+        target=lambda d: np.where(d["target"].gt(0), 1, 0)
+    )
 )[["features", "target"]]
 
-dt = dt.append(sam, ignore_index=True)
+dt = pd.concat((dt, sam), ignore_index=True)
 
 
 logger.info("[+] Dataset")
@@ -100,7 +102,8 @@ logger.info("[+] Generating ROC digrams")
 show_diagram(hisia, X_train, y_train, X_test, y_test, compare_test=True)
 feature_names = hisia.named_steps["count_verctorizer"].get_feature_names_out()
 best_features = [
-    feature_names[i] for i in hisia.named_steps["feature_selector"].get_support(indices=True)
+    feature_names[i]
+    for i in hisia.named_steps["feature_selector"].get_support(indices=True)
 ]
 predictor = hisia.named_steps["logistic_regression"]
 
