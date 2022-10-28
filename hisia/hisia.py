@@ -38,21 +38,23 @@ def persist_model(name: str, clf: Pipeline = None, method: str = "load") -> None
     Raises:
         ValueError: [raised when the arguments are not correct]
     """
+    try:
+        if method == "load":
+            with open(name, "rb") as f:
+                return dill.load(f)
 
-    if method == "load":
-        with open(name, "rb") as f:
-            return dill.load(f)
+        elif method == "save":
+            logger.info(f"[+] Persisting {name} ...")
+            if clf is None:
+                raise ValueError("Pass Model/Pipeline/Transformation")
 
-    elif method == "save":
-        logger.info(f"[+] Persisting {name} ...")
-        if clf is None:
-            raise ValueError("Pass Model/Pipeline/Transformation")
-
-        with open(name, "wb") as f:
-            dill.dump(clf, f)
-            logger.info(f"[+] Persistence Complete. Model {name} is saved")
-    else:
-        raise ValeuError("Wrong arguments")
+            with open(name, "wb") as f:
+                dill.dump(clf, f)
+                logger.info(f"[+] Persistence Complete. Model {name} is saved")
+        else:
+            raise ValueError("Wrong arguments")
+    except FileNotFoundError:
+        pass
 
 
 MODEL_PATH = Path(__file__).parent / "models/base_model.pkl"
