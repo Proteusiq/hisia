@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import (
     classification_report,
     roc_curve,
- 
 )
 
 from hisia.models.lazylogger import logger
@@ -52,8 +51,6 @@ def show_diagram(trained_clf, X_train, y_train, X_test, y_test, compare_test=Tru
     plt.legend(loc="lower right")
     # plt.show()
     plt.savefig("hisia/reports/ROC.png")
-
-
 
 
 # Function modification of Mike Lee Williams(mike@mike.place)

@@ -6,6 +6,8 @@ data:
   data_custom: 'data/data_custom.json'
   data_trustpilot: 'data/data.json'
   data_steffan267: 'data/steffan267_SAM.json'
+  train_data: 'hisia/data/train/train_data.pkl'
+  test_data: 'hisia/data/test/test_data.pkl'
 
 train:
   test_size: 0.2

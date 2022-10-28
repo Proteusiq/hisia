@@ -2,7 +2,6 @@ import json
 from sklearn.metrics import precision_recall_fscore_support
 
 
-
 def classification_report(y_test, y_pred):
     precision, recall, f1, *_ = precision_recall_fscore_support(
         y_test, y_pred, average="weighted"

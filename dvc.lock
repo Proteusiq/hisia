@@ -2,3 +2,80 @@ schema: '2.0'
 stages:
   data:
     cmd: poetry run dvc pull
+  train_data:
+    cmd: PYTHONPATH=. poetry run python hisia/models/generate_data.py --config=params.yaml
+    deps:
+    - path: data/data.json
+      md5: 87327cf60c4655df18946f560e164621
+      size: 85425481
+    - path: data/data_custom.json
+      md5: 34e9876b7bbd9f0d1310dae9d0f11504
+      size: 1154243
+    - path: data/steffan267_SAM.json
+      md5: 9b399be1149c8ab7579fc4ed6e5d805c
+      size: 899465
+    - path: hisia/models/generate_data.py
+      md5: 8a95ff41fed00bff3bce676b27c58809
+      size: 2237
+    params:
+      params.yaml:
+        data:
+          stop_words: hisia/data/stops.pkl
+          data_custom: data/data_custom.json
+          data_trustpilot: data/data.json
+          data_steffan267: data/steffan267_SAM.json
+          train_data: hisia/data/train/train_data.pkl
+          test_data: hisia/data/test/test_data.pkl
+        train:
+          test_size: 0.2
+          vectorizer_max_features: 150000
+          select_k_best: 1000
+          lr_solver: saga
+          lr_scoring: accuracy
+          lr_max_iter: 200
+          lr_verbose: 0
+    outs:
+    - path: hisia/data/test/test_data.pkl
+      md5: 6d10782b4f87c4e8d028018e6bfd8d9e
+      size: 15243206
+    - path: hisia/data/train/train_data.pkl
+      md5: ff6fd1b9371fe4668a7db1bac64f816e
+      size: 60264127
+  prepare:
+    cmd: poetry run dvc pull
+  train_model:
+    cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
+    deps:
+    - path: hisia/data/test/test_data.pkl
+      md5: 6d10782b4f87c4e8d028018e6bfd8d9e
+      size: 15243206
+    - path: hisia/data/train/train_data.pkl
+      md5: ff6fd1b9371fe4668a7db1bac64f816e
+      size: 60264127
+    - path: hisia/models/train_model.py
+      md5: 5eda395c015ce98ad6b5f5a40e338631
+      size: 3482
+    params:
+      params.yaml:
+        data:
+          stop_words: hisia/data/stops.pkl
+          data_custom: data/data_custom.json
+          data_trustpilot: data/data.json
+          data_steffan267: data/steffan267_SAM.json
+          train_data: hisia/data/train/train_data.pkl
+          test_data: hisia/data/test/test_data.pkl
+        train:
+          test_size: 0.2
+          vectorizer_max_features: 150000
+          select_k_best: 1000
+          lr_solver: saga
+          lr_scoring: accuracy
+          lr_max_iter: 200
+          lr_verbose: 0
+    outs:
+    - path: hisia/metrics/classification_report.json
+      md5: aafad80a74904b25f00e202913725c12
+      size: 59
+    - path: hisia/reports/ROC.png
+      md5: ab3df097c929bd0b59bbe8da2a0b2f71
+      size: 45003
