@@ -15,8 +15,8 @@ stages:
       md5: 9b399be1149c8ab7579fc4ed6e5d805c
       size: 899465
     - path: hisia/models/generate_data.py
-      md5: 8a95ff41fed00bff3bce676b27c58809
-      size: 2237
+      md5: c7af2b4f11b7cabd55660b86149df907
+      size: 2361
     params:
       params.yaml:
         data:
@@ -24,8 +24,8 @@ stages:
           data_custom: data/data_custom.json
           data_trustpilot: data/data.json
           data_steffan267: data/steffan267_SAM.json
-          train_data: hisia/data/train/train_data.pkl
-          test_data: hisia/data/test/test_data.pkl
+          train_data: hisia/data/train/train_data.json
+          test_data: hisia/data/test/test_data.json
         train:
           test_size: 0.2
           vectorizer_max_features: 150000
@@ -35,26 +35,26 @@ stages:
           lr_max_iter: 200
           lr_verbose: 0
     outs:
-    - path: hisia/data/test/test_data.pkl
-      md5: 6d10782b4f87c4e8d028018e6bfd8d9e
-      size: 15243206
-    - path: hisia/data/train/train_data.pkl
-      md5: ff6fd1b9371fe4668a7db1bac64f816e
-      size: 60264127
+    - path: hisia/data/test/test_data.json
+      md5: 92dd44bcb69a84651e29339df7efe3e8
+      size: 16626210
+    - path: hisia/data/train/train_data.json
+      md5: 8b92b965859be5d2be26144f4f913dca
+      size: 67669166
   prepare:
     cmd: poetry run dvc pull
   train_model:
     cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
     deps:
-    - path: hisia/data/test/test_data.pkl
-      md5: 6d10782b4f87c4e8d028018e6bfd8d9e
-      size: 15243206
-    - path: hisia/data/train/train_data.pkl
-      md5: ff6fd1b9371fe4668a7db1bac64f816e
-      size: 60264127
+    - path: hisia/data/test/test_data.json
+      md5: 92dd44bcb69a84651e29339df7efe3e8
+      size: 16626210
+    - path: hisia/data/train/train_data.json
+      md5: 8b92b965859be5d2be26144f4f913dca
+      size: 67669166
     - path: hisia/models/train_model.py
-      md5: 5eda395c015ce98ad6b5f5a40e338631
-      size: 3482
+      md5: 8734e32660a4bed7b1df7569e3fb141e
+      size: 3478
     params:
       params.yaml:
         data:
@@ -62,8 +62,8 @@ stages:
           data_custom: data/data_custom.json
           data_trustpilot: data/data.json
           data_steffan267: data/steffan267_SAM.json
-          train_data: hisia/data/train/train_data.pkl
-          test_data: hisia/data/test/test_data.pkl
+          train_data: hisia/data/train/train_data.json
+          test_data: hisia/data/test/test_data.json
         train:
           test_size: 0.2
           vectorizer_max_features: 150000

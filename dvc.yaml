@@ -10,15 +10,15 @@ stages:
       - data/data.json
       - data/steffan267_SAM.json
     outs:
-      - hisia/data/train/train_data.pkl
-      - hisia/data/test/test_data.pkl
+      - hisia/data/train/train_data.json
+      - hisia/data/test/test_data.json
   
   train_model:
     cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
     deps:
       - hisia/models/train_model.py
-      - hisia/data/train/train_data.pkl
-      - hisia/data/test/test_data.pkl
+      - hisia/data/train/train_data.json
+      - hisia/data/test/test_data.json
     params:
       - data
       - train

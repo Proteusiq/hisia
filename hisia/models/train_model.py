@@ -24,10 +24,9 @@ from hisia.reports.visualization import show_most_informative_features
 
 if __name__ == "__main__":
 
-    print("Hello World!")
-    print(config["data"])
-    train_data = pd.read_pickle(config["data"]["train_data"])
-    test_data = pd.read_pickle(config["data"]["test_data"])
+ 
+    train_data = pd.read_json(config["data"]["train_data"])
+    test_data = pd.read_json(config["data"]["test_data"])
 
 
     X_train, y_train = (

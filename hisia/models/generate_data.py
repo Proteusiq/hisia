@@ -37,7 +37,7 @@ def get_data(config):
     )
 
     # adding 8*20 custom fake reviews
-    logger.info("Faking ..")
+    logger.info("[+] Adding Fake 8*20 reviews ..")
     X_train, y_train = (
         pd.concat((X_train, dt["features"]), ignore_index=True),
         pd.concat((y_train, dt["target"]), ignore_index=True),
@@ -54,19 +54,21 @@ def get_data(config):
 
     with open("hisia/metrics/train_data_report.json", "w") as f:
         json.dump(data_stats, f)
-    
+
     train_data = pd.DataFrame()
     train_data["features"] = X_train
     train_data["target"] = y_train
-
-    print(X_train.head(), y_train.head())
 
     test_data = pd.DataFrame()
     test_data["features"] = X_test
     test_data["target"] = y_test
 
-    train_data.to_pickle(config["data"]["train_data"])
-    test_data.to_pickle(config["data"]["test_data"])
+    train_data.to_json(config["data"]["train_data"])
+    logger.info(f"[+] Generated {config['data']['train_data']} Dataset")
+    test_data.to_json(config["data"]["test_data"])
+    logger.info(f"[+] Generated {config['data']['train_data']} Dataset")
+    
+
 
 if __name__ == "__main__":
     get_data(config=config)
