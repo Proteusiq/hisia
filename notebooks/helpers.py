@@ -124,8 +124,8 @@ def show_diagram(trained_clf, X_train, y_train, X_test, y_test, compare_test=Tru
     plt.ylabel("True Positive Rate")
     plt.title("{}".format(title))
     plt.legend(loc="lower right")
-    plt.show();
-    plt.savefig("../hisia/visualization/ROC_tests.png");
+    plt.show()
+    plt.savefig("../hisia/visualization/ROC_tests.png")
 
 
 # Function modification of Mike Lee Williams(mike@mike.place)

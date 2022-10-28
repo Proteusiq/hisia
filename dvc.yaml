@@ -1,0 +1,30 @@
+stages:
+  train_data:
+    cmd: PYTHONPATH=. poetry run python hisia/models/generate_data.py --config=params.yaml
+    params:
+      - data
+      - train
+    deps:
+      - hisia/models/generate_data.py
+      - data/data_custom.json
+      - data/data.json
+      - data/steffan267_SAM.json
+    outs:
+      - hisia/data/train/train_data.json
+      - hisia/data/test/test_data.json
+  
+  train_model:
+    cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
+    deps:
+      - hisia/models/train_model.py
+      - hisia/data/train/train_data.json
+      - hisia/data/test/test_data.json
+    params:
+      - data
+      - train
+    metrics:
+      - hisia/metrics/classification_report.json:
+          cache: false
+    plots:
+      - hisia/reports/ROC.png:
+          cache: false
