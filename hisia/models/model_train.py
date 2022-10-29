@@ -77,6 +77,6 @@ if __name__ == "__main__":
     logger.info("\n[+] Model Saving")
     persist_model(f"{Path(__file__).parent}/base_model.pkl", clf=hisia, method="save")
 
-    logger.info(f"\n[+] Model Saving Completed")
+    logger.info("\n[+] Model Saving Completed")
 
     
