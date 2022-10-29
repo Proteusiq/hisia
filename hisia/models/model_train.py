@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
     hisia = model_training(config, X=X_train, y=y_train)
     
-    logger.info(f"\n[+] Model Saving")
+    logger.info("\n[+] Model Saving")
     persist_model(f"{Path(__file__).parent}/base_model.pkl", clf=hisia, method="save")
 
     logger.info(f"\n[+] Model Saving Completed")
