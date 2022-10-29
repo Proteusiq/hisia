@@ -44,17 +44,14 @@ stages:
   prepare:
     cmd: poetry run dvc pull
   train_model:
-    cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
+    cmd: PYTHONPATH=. poetry run python hisia/models/model_train.py
     deps:
-    - path: hisia/data/test/test_data.json
-      md5: 92dd44bcb69a84651e29339df7efe3e8
-      size: 16626210
     - path: hisia/data/train/train_data.json
       md5: 8b92b965859be5d2be26144f4f913dca
       size: 67669166
-    - path: hisia/models/train_model.py
-      md5: 8734e32660a4bed7b1df7569e3fb141e
-      size: 3478
+    - path: hisia/models/model_train.py
+      md5: 29bbd47bfdae170c1f346fd827145170
+      size: 2264
     params:
       params.yaml:
         data:
@@ -73,9 +70,37 @@ stages:
           lr_max_iter: 200
           lr_verbose: 0
     outs:
-    - path: hisia/metrics/classification_report.json
-      md5: aafad80a74904b25f00e202913725c12
-      size: 59
+    - path: hisia/models/base_model.pkl
+      md5: 98f30f082a666cf31efb7ebef2ac7188
+      size: 30292424
+  test_model:
+    cmd: PYTHONPATH=. poetry run python hisia/models/model_evaluation.py
+    deps:
+    - path: hisia/data/test/test_data.json
+      md5: 92dd44bcb69a84651e29339df7efe3e8
+      size: 16626210
+    - path: hisia/models/base_model.pkl
+      md5: 98f30f082a666cf31efb7ebef2ac7188
+      size: 30292424
+    - path: hisia/models/model_evaluation.py
+      md5: e9e6a6e08379ba954f7a5aef24bfc2af
+      size: 743
+  reports:
+    cmd: PYTHONPATH=. poetry run python hisia/models/model_reports.py
+    deps:
+    - path: hisia/data/test/test_data.json
+      md5: 92dd44bcb69a84651e29339df7efe3e8
+      size: 16626210
+    - path: hisia/data/test/test_data.json
+      md5: 92dd44bcb69a84651e29339df7efe3e8
+      size: 16626210
+    - path: hisia/models/base_model.pkl
+      md5: 98f30f082a666cf31efb7ebef2ac7188
+      size: 30292424
+    - path: hisia/models/model_reports.py
+      md5: 9cb838a77db2c9353959b9698dfb482c
+      size: 845
+    outs:
     - path: hisia/reports/ROC.png
       md5: ab3df097c929bd0b59bbe8da2a0b2f71
       size: 45003

@@ -14,17 +14,30 @@ stages:
       - hisia/data/test/test_data.json
   
   train_model:
-    cmd: PYTHONPATH=. poetry run python hisia/models/train_model.py
+    cmd: PYTHONPATH=. poetry run python hisia/models/model_train.py
     deps:
-      - hisia/models/train_model.py
+      - hisia/models/model_train.py
       - hisia/data/train/train_data.json
-      - hisia/data/test/test_data.json
     params:
       - data
       - train
-    metrics:
-      - hisia/metrics/classification_report.json:
-          cache: false
+    outs:
+      - hisia/models/base_model.pkl
+
+  test_model:
+    cmd: PYTHONPATH=. poetry run python hisia/models/model_evaluation.py
+    deps:
+      - hisia/models/model_evaluation.py
+      - hisia/data/test/test_data.json
+      - hisia/models/base_model.pkl
+
+  reports:
+    cmd: PYTHONPATH=. poetry run python hisia/models/model_reports.py
+    deps:
+      - hisia/models/model_reports.py
+      - hisia/data/test/test_data.json
+      - hisia/data/test/test_data.json
+      - hisia/models/base_model.pkl
     plots:
       - hisia/reports/ROC.png:
           cache: false

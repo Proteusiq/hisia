@@ -17,31 +17,8 @@ from hisia.models.helpers import (
 )
 
 
-from hisia.reports.visualization import show_diagram
-from hisia.metrics.performance import classification_report
-from hisia.reports.visualization import show_most_informative_features
 
-
-if __name__ == "__main__":
-
- 
-    train_data = pd.read_json(config["data"]["train_data"])
-    test_data = pd.read_json(config["data"]["test_data"])
-
-
-    X_train, y_train = (
-        train_data["features"],
-        train_data["target"],
-    )
-
-    print(X_train.head())
-    print(X_train.shape, y_train.shape)
-
-    X_test, y_test = (
-        test_data["features"],
-        test_data["target"],
-    )
-
+def model_training(config, X, y):
 
     hisia = Pipeline(
         steps=[
@@ -77,34 +54,29 @@ if __name__ == "__main__":
     logger.info("-" * 75)
 
     with ignore_warnings():  # ConvergenceWarning
-        hisia.fit(X_train, y_train)
+        hisia.fit(X, y)
 
-    logger.info("-" * 75)
-    logger.info("[+] Model Evaluation in progress ...")
-    logger.info(
-        f"\nScore: {hisia.score(X_test, y_test):.2%} on validation dataset with {len(y_test)} examples"
+    return hisia
+
+
+
+
+if __name__ == "__main__":
+
+    logger.info(f"\n[+] Model training")
+    train_data = pd.read_json(config["data"]["train_data"])
+
+
+    X_train, y_train = (
+        train_data["features"],
+        train_data["target"],
     )
 
-    y_pred = hisia.predict(X_test)
-    classification_report(y_test=y_test, y_pred=y_pred)
-
-
-    logger.info("[+] Generating ROC digrams")
-    show_diagram(hisia, X_train, y_train, X_test, y_test, compare_test=True)
-    feature_names = hisia.named_steps["count_verctorizer"].get_feature_names_out()
-    best_features = [
-        feature_names[i]
-        for i in hisia.named_steps["feature_selector"].get_support(indices=True)
-    ]
-    predictor = hisia.named_steps["logistic_regression"]
-
-    N = 100
-    logger.info(f"Showing {N} models learned features for negative and postive decisions")
-    logger.info("_" * 70)
-    logger.info("\n")
-    show_most_informative_features(best_features, predictor, n=N)
-    logger.info(f"\n[+] Model Saving")
-
-
+    hisia = model_training(config, X=X_train, y=y_train)
+    
+    logger.info("\n[+] Model Saving")
     persist_model(f"{Path(__file__).parent}/base_model.pkl", clf=hisia, method="save")
-    logger.info("[+] Completed! Hurrah :)")
+
+    logger.info("\n[+] Model Saving Completed")
+
+    

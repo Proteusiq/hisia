@@ -9,6 +9,9 @@ data:
   train_data: 'hisia/data/train/train_data.json'
   test_data: 'hisia/data/test/test_data.json'
 
+model:
+  lr: 'hisia/models/base_model.pkl'
+
 train:
   test_size: 0.2
   vectorizer_max_features: 150000
