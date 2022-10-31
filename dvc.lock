@@ -3,7 +3,7 @@ stages:
   data:
     cmd: poetry run dvc pull
   train_data:
-    cmd: PYTHONPATH=. poetry run python hisia/models/generate_data.py --config=params.yaml
+    cmd: python hisia/models/generate_data.py --config=params.yaml
     deps:
     - path: data/data.json
       md5: 87327cf60c4655df18946f560e164621
@@ -44,7 +44,7 @@ stages:
   prepare:
     cmd: poetry run dvc pull
   train_model:
-    cmd: PYTHONPATH=. poetry run python hisia/models/model_train.py
+    cmd: python hisia/models/model_train.py
     deps:
     - path: hisia/data/train/train_data.json
       md5: 8b92b965859be5d2be26144f4f913dca
@@ -71,22 +71,22 @@ stages:
           lr_verbose: 0
     outs:
     - path: hisia/models/base_model.pkl
-      md5: 98f30f082a666cf31efb7ebef2ac7188
+      md5: 3a61905af7edbd9821f8c3d5cbebefde
       size: 30292424
   test_model:
-    cmd: PYTHONPATH=. poetry run python hisia/models/model_evaluation.py
+    cmd: python hisia/models/model_evaluation.py
     deps:
     - path: hisia/data/test/test_data.json
       md5: 92dd44bcb69a84651e29339df7efe3e8
       size: 16626210
     - path: hisia/models/base_model.pkl
-      md5: 98f30f082a666cf31efb7ebef2ac7188
+      md5: 3a61905af7edbd9821f8c3d5cbebefde
       size: 30292424
     - path: hisia/models/model_evaluation.py
       md5: e9e6a6e08379ba954f7a5aef24bfc2af
       size: 743
   reports:
-    cmd: PYTHONPATH=. poetry run python hisia/models/model_reports.py
+    cmd: python hisia/models/model_reports.py
     deps:
     - path: hisia/data/test/test_data.json
       md5: 92dd44bcb69a84651e29339df7efe3e8
@@ -95,7 +95,7 @@ stages:
       md5: 92dd44bcb69a84651e29339df7efe3e8
       size: 16626210
     - path: hisia/models/base_model.pkl
-      md5: 98f30f082a666cf31efb7ebef2ac7188
+      md5: 3a61905af7edbd9821f8c3d5cbebefde
       size: 30292424
     - path: hisia/models/model_reports.py
       md5: 9cb838a77db2c9353959b9698dfb482c

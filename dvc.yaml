@@ -1,6 +1,6 @@
 stages:
   train_data:
-    cmd: PYTHONPATH=. poetry run python hisia/models/generate_data.py --config=params.yaml
+    cmd: python hisia/models/generate_data.py --config=params.yaml
     params:
       - data
       - train
@@ -14,7 +14,7 @@ stages:
       - hisia/data/test/test_data.json
   
   train_model:
-    cmd: PYTHONPATH=. poetry run python hisia/models/model_train.py
+    cmd: python hisia/models/model_train.py
     deps:
       - hisia/models/model_train.py
       - hisia/data/train/train_data.json
@@ -25,14 +25,14 @@ stages:
       - hisia/models/base_model.pkl
 
   test_model:
-    cmd: PYTHONPATH=. poetry run python hisia/models/model_evaluation.py
+    cmd: python hisia/models/model_evaluation.py
     deps:
       - hisia/models/model_evaluation.py
       - hisia/data/test/test_data.json
       - hisia/models/base_model.pkl
 
   reports:
-    cmd: PYTHONPATH=. poetry run python hisia/models/model_reports.py
+    cmd: python hisia/models/model_reports.py
     deps:
       - hisia/models/model_reports.py
       - hisia/data/test/test_data.json

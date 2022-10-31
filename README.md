@@ -39,6 +39,9 @@ positive_gro.explain
 # }
 
 ```
+NB: Undergo restructuring  
+
+
 ### Hisia (Emotions)
 _Hisia_ is a Swahili word for emotion/feeling. My initial thought was to call it _Følelser_, a Danish word for feeling but it was just not right. As a Tanzanian, I went with Swahili as it was much more of a package name I would like to install from PyPI. :) 
 
@@ -51,6 +54,9 @@ Getting the code and data
 ```bash
 git clone git@github.com:Proteusiq/hisia.git && cd hisia
 poetry install && dvc pull 
+
+# reproduce models
+dvc repro
 ```
 
 ### Data and Models Used in Hisia
