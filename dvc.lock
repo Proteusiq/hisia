@@ -50,8 +50,8 @@ stages:
       md5: 8b92b965859be5d2be26144f4f913dca
       size: 67669166
     - path: hisia/models/model_train.py
-      md5: 29bbd47bfdae170c1f346fd827145170
-      size: 2264
+      md5: 0931783b6e2930317582d0f0db533532
+      size: 2262
     params:
       params.yaml:
         data:
@@ -71,7 +71,7 @@ stages:
           lr_verbose: 0
     outs:
     - path: hisia/models/base_model.pkl
-      md5: 3a61905af7edbd9821f8c3d5cbebefde
+      md5: 67ac21f7c949e3bfc387fb1e094d73cf
       size: 30292424
   test_model:
     cmd: python hisia/models/model_evaluation.py
@@ -80,7 +80,7 @@ stages:
       md5: 92dd44bcb69a84651e29339df7efe3e8
       size: 16626210
     - path: hisia/models/base_model.pkl
-      md5: 3a61905af7edbd9821f8c3d5cbebefde
+      md5: 67ac21f7c949e3bfc387fb1e094d73cf
       size: 30292424
     - path: hisia/models/model_evaluation.py
       md5: e9e6a6e08379ba954f7a5aef24bfc2af
@@ -95,7 +95,7 @@ stages:
       md5: 92dd44bcb69a84651e29339df7efe3e8
       size: 16626210
     - path: hisia/models/base_model.pkl
-      md5: 3a61905af7edbd9821f8c3d5cbebefde
+      md5: 67ac21f7c949e3bfc387fb1e094d73cf
       size: 30292424
     - path: hisia/models/model_reports.py
       md5: 9cb838a77db2c9353959b9698dfb482c
