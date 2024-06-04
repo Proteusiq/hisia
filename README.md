@@ -13,10 +13,6 @@ from hisia import Hisia
 
 negative_joe = Hisia('Det er simpelthen ikke okay :(')
 negative_joe.sentiment
-# from hisia import Hisia
-
-negative_joe = Hisia('Det er simpelthen ikke okay :(')
-negative_joe.sentiment
 # Sentiment(sentiment='negative', positive_probability=0.008, negative_probability=0.992)
 negative_joe.explain
 # {'decision': -4.8335798389992055,
